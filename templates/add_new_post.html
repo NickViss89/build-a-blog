@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Write a blog!</h1>
+    <form method='post'>
+        <label>
+            Title:
+            <input type="text" name='title' />
+        </label>
+        <label>
+            Body:
+            <input type="textarea" name="body" />
+        </label>
+        <input type="submit" value='Publish' />
+    </form>
+
+    <hr />
+
+    {% if posts|length == 0 %}
+    <p>No blogs yet</p>
+    {% else %}
+
+        <ul>
+            {% for post in posts %}
+            <li>{{post.title}}
+                <form method="POST" action=#>
+                    <input type= name="task-id" value="{{task.id}}" />
+                    <input type="submit" value="Done!" />
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    <hr />
+
+    <h2>Build a Blog</h2>
+
+    <ul>
+        {% for task in completed_tasks %}
+        <li>{{task.name}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
