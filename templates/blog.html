@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<h1>All Blogs</h1>
 <form action='/blog'>
-    <a href=/newpost method='post'>Add a Post</a>
-{% if posts|length == 0 %}
-<p>No blogs yet</p>
-{% else %}
-
     <ul>
         {% for post in posts %}
         <li>
-            <h1>{{title}}</h1>
+            <h1>{{blog.title}}</h1>
         </li>
         <li>
-            <p>{{body}}</p>
+            {{blog.body}}
         </li>
         {% endfor %}
     </ul>
 </form>
-{% endif %}
+
 
 {% endblock %}

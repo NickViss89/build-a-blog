@@ -35,22 +35,15 @@ def blog_entries():
 
     title = Blog.query.all()
     body = Blog.query.all()  
-    return render_template('new_post.html', title=title, body=body)
+    return render_template('new_post.html')
         
 @app.route("/blog", methods=['GET', 'POST'])
 def blog():
-    return render_template("blog.html")
 
-#@app.route('/delete-task', methods=['POST'])
-#def delete_task():
-
-    #task_id = int(request.form['task-id'])
-    #task = Task.query.get(task_id)
-    #task.completed = True
-    #db.session.add(task)
-    #db.session.commit()
-
-    #return redirect('/')
+    title = Blog.query.get('title')
+    body = Blog.query.get('body')
+    posts = Blog(title, body)
+    return render_template("blog.html", title=title, body=body)
 
 
 if __name__ == '__main__':
