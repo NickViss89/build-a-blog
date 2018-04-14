@@ -21,10 +21,10 @@ class Blog(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('add_new_post.html')
+    return redirect('/blog')
 
    
-@app.route("/")
+@app.route("/newpost", methods=['GET', 'POST'])
 def blog_entries():
     if request.method == 'POST':    
         blog_title = request.form['title']
@@ -33,10 +33,13 @@ def blog_entries():
         db.session.add(new_blog)
         db.session.commit()
 
-    posts = Blog.query.filter_by(id).all()    
-    return render_template('add_new_post.html', title=title, body=body)
+    title = Blog.query.all()
+    body = Blog.query.all()  
+    return render_template('new_post.html', title=title, body=body)
         
-
+@app.route("/blog", methods=['GET', 'POST'])
+def blog():
+    return render_template("blog.html")
 
 #@app.route('/delete-task', methods=['POST'])
 #def delete_task():
