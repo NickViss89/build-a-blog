@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Write a blog!</h1>
     <form action="/newpost" method='post'>
-        <p>{{req_error}}</p>
+        <p class=error>{{req_error}}</p>
         <label>
             Title:
             <input type="text" name='title' />
