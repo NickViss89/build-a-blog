@@ -28,19 +28,22 @@ def index():
 def blog_entries():
 
     if request.method == 'POST':
-        blog_title = request.form['title']
-        blog_body = request.form['body']
-        req_error = ""
-        if len(blog_title) == 0 or len(blog_body) == 0:
-            req_error = "Both fields required"
-        if req_error == "":
+        blog_title = request.form['blog_title']
+        blog_body = request.form['blog_body']
+        title_error = ""
+        body_error = ""
+        if len(blog_title) == 0:
+            title_error = "Title is required"
+        if len(blog_body) == 0:
+            body_error = "Body is required"
+        if title_error or body_error:
+            return render_template('new_post.html', title_error=title_error, body_error=body_error, blog_title=blog_title, blog_body=blog_body)
+        else:
             new_blog = Blog(blog_title, blog_body)
             db.session.add(new_blog)
             db.session.commit()
             post = new_blog.id
             return redirect('/blog?id=' + str(post))
-        else:
-            return render_template('new_post.html', req_error=req_error)
     return render_template('new_post.html')
       
 @app.route("/blog", methods=['GET', 'POST'])
